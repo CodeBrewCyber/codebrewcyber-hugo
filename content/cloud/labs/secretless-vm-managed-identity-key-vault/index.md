@@ -92,6 +92,7 @@ az network vnet subnet update -g rg-sc500w4-lab-eastus-001 --vnet-name vnet-sc50
 |---|---|---|
 | Basics | Image | Ubuntu Server LTS **Gen2** |
 | Basics | Security type | **Trusted launch virtual machines** |
+| Basics | Authentication type | **Password** (or SSH public key, see the note below) |
 | Basics | Public inbound ports | **None** |
 | Networking | Virtual network / subnet | the ones from Step 1 |
 | Networking | Public IP | **None** |
@@ -102,7 +103,9 @@ Trusted Launch requires Gen2. If the dropdown will not offer it, the image is Ge
 
 ![VM Basics tab with Trusted launch selected](09-vm-basics-trusted-launch.png)
 
-![VM administrator account and inbound ports set to None](10-vm-admin-account.png)
+![VM administrator account set to Password authentication with inbound ports None](10-vm-admin-account.png)
+
+> **Why a password on a "secretless" VM?** The admin credential never crosses the internet and the workload never uses it. There is no inbound path to this VM at all, so the only way in is Bastion, which authenticates you against Entra first and terminates the session inside Azure. "Secretless" here means the VM holds no credential for **Key Vault**: that job belongs to the managed identity in Step 7. An SSH key pair works identically, and Bastion accepts either.
 
 ![Configure security features with Secure Boot and vTPM enabled](11-secure-boot-vtpm.png)
 
