@@ -9,6 +9,10 @@
 
 # Claude Code
 CLAUDE.md
+# Skills are version-controlled so they survive a clone; the rest of .claude/ is
+# machine-local (launch.json, worktrees/) and stays out.
+.claude/*
+!.claude/skills/
 
 # OS/editor noise
 .DS_Store
