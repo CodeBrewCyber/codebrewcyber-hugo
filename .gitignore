@@ -4,7 +4,9 @@
 /.hugo_build.lock
 
 # Hugo module/cache directories
-/vendor/
+# `hugo mod vendor` writes to _vendor/, not vendor/ (the theme is pulled as a
+# Hugo module and tracked via go.mod/go.sum, so the vendored copy stays out).
+/_vendor/
 /hugo_stats.json
 
 # Claude Code
